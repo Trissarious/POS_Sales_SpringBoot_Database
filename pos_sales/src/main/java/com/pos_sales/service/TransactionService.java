@@ -1,5 +1,7 @@
 package com.pos_sales.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,12 @@ public class TransactionService {
 		return trepo.save(transaction);
 	}
 	
+	public List<TransactionModel> getAllTransaction(){
+		return trepo.findAll();
+	}
+	
 	//R -Read or search for transaction record by transaction id
-	public TransactionModel findByTransactionid(String transactionid) {
+	public TransactionModel findByTransactionid(int transactionid) {
 		if (trepo.findByTransactionid(transactionid) !=null)
 			return trepo.findByTransactionid(transactionid);
 		else
@@ -28,7 +34,7 @@ public class TransactionService {
 	public String deleteTransaction(int transactionid) {
 		String msg;
 		if (trepo.findById(transactionid) !=null) {
-			trepo.deleteByTransactionid(transactionid);
+			trepo.deleteById(transactionid);
 			
 			msg = "Transaction "+ transactionid + " succesfully deleted!";
 		} else

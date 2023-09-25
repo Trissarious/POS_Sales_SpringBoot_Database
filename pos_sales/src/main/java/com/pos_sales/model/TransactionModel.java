@@ -30,4 +30,27 @@ public class TransactionModel {
 		this.customer_email = customer_email;
 	}
 	
+	public int getTransactionid() {
+		return transactionid;
+	}
+	
+	public double total_quantity() {
+		return total_quantity;
+	}
+	
+	public double total_price() {
+		return total_price;
+	}
+	
+	public String customer_name() {
+		return customer_name;
+	}
+	
+	public String customer_num() {
+		return customer_num;
+	}
+	
+	public String customer_email() {
+		return customer_email;
+	}
 }
