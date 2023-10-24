@@ -27,6 +27,7 @@ public class AccountsService {
 	}
 	
 	//R - Read or search account record by username
+	
 			public AccountsModel findByUsername(String username) {
 				if (arepo.findByUsername(username) !=null)
 					return arepo.findByUsername(username);

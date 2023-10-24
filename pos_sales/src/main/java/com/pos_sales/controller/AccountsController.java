@@ -3,6 +3,9 @@ package com.pos_sales.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +20,7 @@ import com.pos_sales.model.AccountsModel;
 import com.pos_sales.service.AccountsService;
 
 
-
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
@@ -43,6 +46,7 @@ public class AccountsController {
 					return aserv.getAllAccounts();
 				}
 				
+				
 				//Read a record by user name
 				@GetMapping("/getByUser")
 				public AccountsModel findByUsername(@RequestParam String username) {
@@ -58,6 +62,66 @@ public class AccountsController {
 				//Delete a record
 				@DeleteMapping("/deleteAccount/{userid}")
 				public String deleteAccount(@PathVariable int userid) {
-					return aserv.deleteAccount(userid);
+					return
+							aserv.deleteAccount(userid);
 				}
+				
+				@PostMapping("/logincash")
+				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
+				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+				    
+				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+				        // Check the account_type to see if the user is a cashier
+				        if ("Cashier".equals(user.getAccount_type())) {
+				            // Successful login for a cashier user
+				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+				        } else {
+				            // Reject login for users with other account types
+				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+				        }
+				    } else {
+				        // Failed login
+				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+				    }
+				}
+
+				@PostMapping("/loginsales")
+				public ResponseEntity<String> loginsales(@RequestBody AccountsModel loginRequest) {
+				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+				    
+				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+				        // Check the account_type to see if the user is a cashier
+				        if ("Sales Manager".equals(user.getAccount_type())) {
+				            // Successful login for a cashier user
+				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+				        } else {
+				            // Reject login for users with other account types
+				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+				        }
+				    } else {
+				        // Failed login
+				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+				    }
+				}		
+				
+				@PostMapping("/loginad")
+				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
+				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+				    
+				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+				        // Check the account_type to see if the user is a cashier
+				        if ("Admin".equals(user.getAccount_type())) {
+				            // Successful login for a cashier user
+				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+				        } else {
+				            // Reject login for users with other account types
+				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+				        }
+				    } else {
+				        // Failed login
+				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+				    }
+				}					
+				
+				
 }
