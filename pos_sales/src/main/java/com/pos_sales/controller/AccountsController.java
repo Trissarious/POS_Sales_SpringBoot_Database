@@ -110,7 +110,7 @@ public class AccountsController {
 				    
 				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 				        // Check the account_type to see if the user is a cashier
-				        if ("Admin".equals(user.getAccount_type())) {
+				        if ("Administrator".equals(user.getAccount_type())) {
 				            // Successful login for a cashier user
 				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
 				        } else {

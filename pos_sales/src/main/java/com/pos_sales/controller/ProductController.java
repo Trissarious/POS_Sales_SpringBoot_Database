@@ -35,6 +35,7 @@ public class ProductController {
 				//Create or insert a product record
 				@PostMapping("/postProduct")
 				public ProductModel insertProduct(@RequestBody ProductModel product) {
+					product.setDeleted(false);
 					return pserv.insertProduct(product);
 				}
 				
@@ -50,14 +51,19 @@ public class ProductController {
 					return pserv.findByProductName(productname);	
 				}
 				
-				//Update a record
+				//Update quantity
 				@PutMapping("/putProduct")
 				public ProductModel putProduct(@RequestParam int productid, @RequestBody ProductModel newProductDetails) throws Exception{
 					return pserv.putProduct(productid, newProductDetails);
 				}
 				
+				@PutMapping("/putQuantity")
+				public ProductModel putQuantity(@RequestParam int productid, @RequestBody ProductModel newProductDetails) throws Exception{
+					return pserv.putQuantity(productid, newProductDetails);
+				}
+				
 				//Delete a record
-				@DeleteMapping("/deleteProduct/{productid}")
+				@PutMapping("/deleteProduct/{productid}")
 				public String deleteProduct(@PathVariable int productid) {
 					return pserv.deleteProduct(productid);
 				}
