@@ -86,4 +86,48 @@ public class ProductService {
 
         return msg;
     }
+    
+    public ProductModel getMostPurchasedProduct() {
+        // Query the database to retrieve the product with the highest purchaseCount
+        return prepo.findTopByOrderByPurchaseCountDesc();
+    }
+    
+    public ProductModel decreaseQuantity(int productid, int quantityToDecrease) throws Exception {
+        try {
+            ProductModel product = prepo.findById(productid).orElseThrow(() -> new NoSuchElementException("Product " + productid + " does not exist!"));
+
+            // Decrease the quantity by the specified amount
+            int newQuantity = product.getQuantity() - quantityToDecrease;
+            product.setQuantity(newQuantity);
+
+            // Ensure the isDeleted flag remains false after updates
+            product.setDeleted(false);
+
+            return prepo.save(product);
+        } catch (NoSuchElementException nex) {
+            throw new Exception("Product " + productid + " does not exist!");
+        }
+    }
+
+
+
+    public ProductModel incrementPurchaseCount(int productid, int quantityPurchased) throws Exception {
+        try {
+            ProductModel product = prepo.findById(productid).orElseThrow(() -> new NoSuchElementException("Product " + productid + " does not exist!"));
+
+            // Increment the purchase count by the specified quantity purchased
+            int newPurchaseCount = product.getPurchaseCount() + quantityPurchased;
+            product.setPurchaseCount(newPurchaseCount);
+
+            // Ensure the isDeleted flag remains false after updates
+            product.setDeleted(false);
+
+            return prepo.save(product);
+        } catch (NoSuchElementException nex) {
+            throw new Exception("Product " + productid + " does not exist!");
+        }
+    }
+
+
+
 }

@@ -51,6 +51,8 @@ public class TransactionService {
 					transaction.setCustomer_name(newTransactionDetails.getCustomer_name());
 					transaction.setCustomer_num(newTransactionDetails.getCustomer_num());
 					transaction.setCustomer_email(newTransactionDetails.getCustomer_email());
+					transaction.setRefunded(newTransactionDetails.isRefunded());
+					transaction.setReturned(newTransactionDetails.isReturned());
 					transaction.setProduct(newTransactionDetails.getProduct());
 					
 					//Step 3 - save the information and return the value
@@ -86,5 +88,42 @@ public class TransactionService {
 		            // Handle the case where the transaction with the given ID is not found
 		            return null; // You can return an empty list or handle the error as needed
 		        }
-		    }			
+		    }	
+		    
+
+			public TransactionModel isReturned(int transactionid,  TransactionModel newTransactionDetails) throws Exception {
+				TransactionModel transaction = new TransactionModel();
+				try {
+					//steps in updating
+					//Step 1 - search the id number of the user
+					transaction = trepo.findByTransactionid(transactionid);
+
+					//Step 2 - update the record
+					transaction.setReturned(newTransactionDetails.isReturned());
+
+					//Step 3 - save the information and return the value
+					return trepo.save(transaction);
+
+				} catch (NoSuchElementException nex) {
+					throw new Exception("Cannot refund this transaction.");
+				}
+			}
+
+			public TransactionModel isRefund (int transactionid,  TransactionModel newTransactionDetails) throws Exception {
+				TransactionModel transaction = new TransactionModel();
+				try {
+					//steps in updating
+					//Step 1 - search the id number of the user
+					transaction = trepo.findByTransactionid(transactionid);
+
+					//Step 2 - update the record
+					transaction.setRefunded(newTransactionDetails.isRefunded());
+
+					//Step 3 - save the information and return the value
+					return trepo.save(transaction);
+
+				} catch (NoSuchElementException nex) {
+					throw new Exception("Cannot refund this transaction.");
+				}
+			}
 }

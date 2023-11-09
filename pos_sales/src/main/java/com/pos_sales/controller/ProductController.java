@@ -3,6 +3,7 @@ package com.pos_sales.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +66,46 @@ public class ProductController {
 				//Delete a record
 				@PutMapping("/deleteProduct/{productid}")
 				public String deleteProduct(@PathVariable int productid) {
-					return pserv.deleteProduct(productid);
+					return pserv.deleteProduct(productid); 
 				}
+				
+			    @GetMapping("/most-purchased")
+			    public ResponseEntity<ProductModel> getMostPurchasedProduct() {
+			        // Call the service to retrieve the most purchased product
+			        ProductModel mostPurchasedProduct = pserv.getMostPurchasedProduct();
+
+			        if (mostPurchasedProduct != null) {
+			            return ResponseEntity.ok(mostPurchasedProduct);
+			        } else {
+			            return ResponseEntity.notFound().build();
+			        }
+			    }				
+				
+			 // Decrease quantity of a product
+			    @PutMapping("/decreaseQuantity/{productid}")
+			    public ResponseEntity<String> decreaseQuantity(
+			            @PathVariable int productid,
+			            @RequestParam("quantityToDecrease") int quantityToDecrease
+			    ) {
+			        try {
+			            ProductModel product = pserv.decreaseQuantity(productid, quantityToDecrease);
+			            return ResponseEntity.ok("Quantity decreased for product: " + product.getProductname());
+			        } catch (Exception e) {
+			            return ResponseEntity.badRequest().body(e.getMessage());
+			        }
+			    }
+
+
+			    // Increment purchase count of a product by a specified quantity
+			    @PutMapping("/incrementPurchaseCount/{productid}")
+			    public ResponseEntity<String> incrementPurchaseCount(@PathVariable int productid, @RequestParam int quantityPurchased) {
+			        try {
+			            ProductModel product = pserv.incrementPurchaseCount(productid, quantityPurchased);
+			            return ResponseEntity.ok("Purchase count incremented for product: " + product.getProductname());
+			        } catch (Exception e) {
+			            return ResponseEntity.badRequest().body(e.getMessage());
+			        }
+			    }
+
+			    
 }

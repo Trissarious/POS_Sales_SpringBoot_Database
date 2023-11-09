@@ -74,5 +74,17 @@ public class TransactionController {
 			            // You can return an error response or appropriate HTTP status code (e.g., 404 Not Found)
 			            return null;
 			        }
-			    }				
+			    }		
+			    
+				//isRefunded
+				@PutMapping("/isRefunded")
+				public TransactionModel isRefunded(@RequestParam int transactionid, @RequestBody TransactionModel newTransactionDetails) throws Exception{
+					return tserv.isRefund(transactionid, newTransactionDetails);
+				}
+
+				//isReturned
+				@PutMapping("/isReturned")
+				public TransactionModel isReturned(@RequestParam int transactionid, @RequestBody TransactionModel newTransactionDetails) throws Exception{
+					return tserv.isReturned(transactionid, newTransactionDetails);
+				}
 }

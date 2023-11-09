@@ -18,15 +18,17 @@ public class ProductModel {
     private int quantity;
     private double price;
     private boolean isDeleted; // Add isDeleted field
-
+    private int purchaseCount; 
+    
     public ProductModel() {
     }
 
-    public ProductModel(int productid, String productname, int quantity, double price) {
+    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount) {
         this.productid = productid;
         this.productname = productname;
         this.quantity = quantity;
         this.price = price;
+        this.purchaseCount = purchaseCount;
     }
 
     public int getProductid() {
@@ -67,5 +69,13 @@ public class ProductModel {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+    
+    public int getPurchaseCount() {
+    	return purchaseCount;
+    }
+    
+    public void setPurchaseCount(int purchaseCount) {
+    	this.purchaseCount = purchaseCount;
     }
 }
