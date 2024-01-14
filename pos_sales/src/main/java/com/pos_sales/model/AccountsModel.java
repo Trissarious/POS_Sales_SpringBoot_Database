@@ -1,13 +1,7 @@
 package com.pos_sales.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
 @Table(name="tbl_accounts")
 	public class AccountsModel {
@@ -15,21 +9,30 @@ import javax.persistence.Table;
 		@Id
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
 	    private int userid;
-	    
+		@Column(nullable=false, unique = true)
 	    private String username;
+		@Column(nullable=false)
 	    private String password;
+		@Column(nullable=false)
 	    private String account_type;
+		@Column(nullable = false, unique = true)
 	    private String email;
+		@Column(nullable=false)
 	    private String fname;
+		@Column(nullable=false)
 	    private String lname;
+		@Column(nullable=false)
 	    private String business_name;
+		@Column(nullable=false)
 	    private String address;
+		@Column(nullable=false)
 	    private String contactnum;
+		@Column(nullable=false)
 	    private String gender;
+		@Column(nullable=false)
 	    private String bday;
 	    private String resetToken;
 	    private LocalDateTime resetTokenExpiration;
-	  
 	    
 	    public AccountsModel() {}
 	    

@@ -1,13 +1,12 @@
 package com.pos_sales.service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
+import com.pos_sales.model.AccountsModel;
+import com.pos_sales.repository.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pos_sales.model.AccountsModel;
-import com.pos_sales.repository.AccountsRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 
 
