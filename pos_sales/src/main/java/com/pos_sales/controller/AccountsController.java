@@ -78,44 +78,57 @@ public class AccountsController {
 				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 				    }
 				}
+
+				@PostMapping({"/logincash"})
+				public ResponseEntity<?> logincash(@RequestBody AccountsModel loginRequest) {
+					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+
+					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+						// Successful authentication
+						if ("Cashier".equals(user.getAccount_type())) {
+							// Return user object for successful admin login
+							return new ResponseEntity<>(user, HttpStatus.OK);
+						} else {
+							// Deny access for other account types
+							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+						}
+					} else {
+						// Handle invalid credentials
+						if (user != null && user.getPassword().equals(null)) {
+							// Specific message for missing password
+							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+						} else {
+							// General message for invalid credentials
+							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+						}
+					}
+				}
 				
-				@PostMapping("/logincash")
-				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
-				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
-				    
-				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-				        // Check the account_type to see if the user is a cashier
-				        if ("Cashier".equals(user.getAccount_type())) {
-				            // Successful login for a cashier user
-				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
-				        } else {
-				            // Reject login for users with other account types
-				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
-				        }
-				    } else {
-				        // Failed login
-				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
-				    }
+				@PostMapping({"/loginsales"})
+				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
+					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+
+					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+						// Successful authentication
+						if ("Sales Manager".equals(user.getAccount_type())) {
+							// Return user object for successful admin login
+							return new ResponseEntity<>(user, HttpStatus.OK);
+						} else {
+							// Deny access for other account types
+							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+						}
+					} else {
+						// Handle invalid credentials
+						if (user != null && user.getPassword().equals(null)) {
+							// Specific message for missing password
+							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+						} else {
+							// General message for invalid credentials
+							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+						}
+					}
 				}
 
-				@PostMapping("/loginsales")
-				public ResponseEntity<String> loginsales(@RequestBody AccountsModel loginRequest) {
-				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
-				    
-				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-				        // Check the account_type to see if the user is a cashier
-				        if ("Sales Manager".equals(user.getAccount_type())) {
-				            // Successful login for a cashier user
-				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
-				        } else {
-				            // Reject login for users with other account types
-				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
-				        }
-				    } else {
-				        // Failed login
-				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
-				    }
-				}
 //				@PostMapping("/loginad")
 //				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 //					AccountsModel user = this.aserv.findByUsername(loginRequest.getUsername());
@@ -158,8 +171,6 @@ public class AccountsController {
 						}
 					}
 				}
-
-
 
 				@PostMapping("forgotpassword") 
 				public ResponseEntity<String> resetPassword(@RequestBody AccountsModel resetRequest) {
