@@ -103,7 +103,7 @@ public class AccountsController {
 						}
 					}
 				}
-				
+
 				@PostMapping({"/loginsales"})
 				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
