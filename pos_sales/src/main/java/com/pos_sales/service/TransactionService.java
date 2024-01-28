@@ -1,15 +1,13 @@
 package com.pos_sales.service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.pos_sales.model.AccountsModel;
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.model.TransactionModel;
 import com.pos_sales.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -113,8 +111,8 @@ public class TransactionService {
 				
 				return msg;
 			}
-			
 
+			// Display products purchased according to the transaction performed ^-^
 		    public List<ProductModel> getProducts(int transactionId) {
 		        // Find the transaction by ID
 		        TransactionModel transaction = trepo.findById(transactionId).get();

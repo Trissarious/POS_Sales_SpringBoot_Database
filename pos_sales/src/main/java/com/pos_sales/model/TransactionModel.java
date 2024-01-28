@@ -1,20 +1,10 @@
 package com.pos_sales.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @RestController
@@ -109,8 +99,8 @@ import org.springframework.web.bind.annotation.RestController;
 		}
 
 		public List<ProductModel> getProduct() {
-			return product;
-		}
+		return product;
+	}
 
 		public void setProduct(List<ProductModel> product) {
 			this.product = product;

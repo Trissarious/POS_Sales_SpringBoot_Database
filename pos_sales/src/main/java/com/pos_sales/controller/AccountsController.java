@@ -129,24 +129,6 @@ public class AccountsController {
 					}
 				}
 
-//				@PostMapping("/loginad")
-//				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
-//					AccountsModel user = this.aserv.findByUsername(loginRequest.getUsername());
-//
-//					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-//						if ("Administrator".equals(user.getAccount_type())) {
-//							return new ResponseEntity<>("Login successful. Hello, " + user.getUsername()
-//									+ "\nBusiness Name: " + user.getBusiness_name(), HttpStatus.OK);
-//						} else {
-//							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
-//						}
-//					} else if (user != null && user.getPassword().equals(null)) {
-//						return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
-//					} else {
-//						return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
-//					}
-//				}
-
 				@PostMapping({"/loginad"})
 				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());

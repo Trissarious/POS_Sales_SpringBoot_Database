@@ -1,22 +1,13 @@
 package com.pos_sales.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.pos_sales.model.AccountsModel;
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -107,5 +98,15 @@ public class ProductController {
 			        }
 			    }
 
-			    
+				// Read all products only with the same business_name
+				@GetMapping("/{productid}/accounts")
+				public List<AccountsModel> getAccountsProducts(@PathVariable int productid) {
+					List<AccountsModel> accounts = pserv.getAccounts(productid);
+
+					if (accounts != null) {
+						return accounts;
+					} else {
+						return null;
+					}
+				}
 }

@@ -1,22 +1,12 @@
 package com.pos_sales.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.model.TransactionModel;
 import com.pos_sales.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -69,15 +59,16 @@ public class TransactionController {
 					return tserv.isReturned(transactionid, newTransactionDetails);
 				}
 				
-				//Delete a record
+				// Delete a record
 				@DeleteMapping("/deleteTransaction/{transactionid}")
 				public String deleteTransaction(@PathVariable int transactionid) {
 					return tserv.deleteTransaction(transactionid);
 				}
-				
-			    @GetMapping("/{transactionId}/products")
-			    public List<ProductModel> getProductsForTransaction(@PathVariable int transactionId) {
-			        List<ProductModel> products = tserv.getProducts(transactionId);
+
+				// Read all transactions performed with products purchased
+			    @GetMapping("/{transactionid}/products")
+			    public List<ProductModel> getProductsForTransaction(@PathVariable int transactionid) {
+			        List<ProductModel> products = tserv.getProducts(transactionid);
 			        
 			        if (products != null) {
 			            return products;

@@ -1,13 +1,13 @@
 package com.pos_sales.service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
+import com.pos_sales.model.AccountsModel;
+import com.pos_sales.model.ProductModel;
+import com.pos_sales.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pos_sales.model.ProductModel;
-import com.pos_sales.repository.ProductRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductService {
@@ -128,6 +128,17 @@ public class ProductService {
         }
     }
 
+    // Display products purchased according to the transaction performed ^-^
+    public List<AccountsModel> getAccounts(int productid) {
+        // Find the product by userid
+        ProductModel product = prepo.findById(productid).get();
 
+        if (product != null) {
+            // Get the list of products associated with the transaction
+            return product.getAccounts();
+        } else {
+            return null;
+        }
+    }
 
 }

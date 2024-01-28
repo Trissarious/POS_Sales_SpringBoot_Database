@@ -1,10 +1,7 @@
 package com.pos_sales.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_product")
@@ -17,27 +14,32 @@ public class ProductModel {
     private String productname;
     private int quantity;
     private double price;
-    private boolean isDeleted; // Add isDeleted field
-    private int purchaseCount; 
+    private boolean isDeleted;
+    private int purchaseCount;
+
+    @Column(unique = false)
+    @OneToMany
+    public List<AccountsModel> accounts;
 
     public ProductModel() {
     }
 
-    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount) {
+    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount, List<AccountsModel> accounts) {
         this.productid = productid;
         this.productname = productname;
         this.quantity = quantity;
         this.price = price;
         this.purchaseCount = purchaseCount;
+        this.accounts = accounts;
+    }
+
+    public List<AccountsModel> getAccounts() {
+        return accounts;
     }
 
     public int getProductid() {
         return productid;
     }
-
-//    public void setProductid(int productid) {
-//        this.productid = productid;
-//    }
 
     public String getProductname() {
         return productname;
