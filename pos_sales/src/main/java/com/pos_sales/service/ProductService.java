@@ -40,6 +40,7 @@ public class ProductService {
             // Step 2 - update the record
             product.setProductname(newProductDetails.getProductname());
             product.setPrice(newProductDetails.getPrice());
+            product.setQuantity(newProductDetails.getQuantity());
 
             // Ensure the isDeleted flag remains false after updates
             product.setDeleted(false);

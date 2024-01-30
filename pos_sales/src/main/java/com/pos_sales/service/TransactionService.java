@@ -61,6 +61,10 @@ public class TransactionService {
 					throw new Exception("Transaction " + transactionid + " does not exist!");
 				}
 			}
+
+			public Double computeGrossSales() {
+				return trepo.computeGrossSales();
+			}
 			
 			public TransactionModel isReturned(int transactionid,  TransactionModel newTransactionDetails) throws Exception {
 				TransactionModel transaction = new TransactionModel();
@@ -124,5 +128,6 @@ public class TransactionService {
 		            // Handle the case where the transaction with the given ID is not found
 		            return null; // You can return an empty list or handle the error as needed
 		        }
-		    }			
+		    }
+
 }

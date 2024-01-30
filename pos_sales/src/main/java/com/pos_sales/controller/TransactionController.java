@@ -4,6 +4,7 @@ import com.pos_sales.model.ProductModel;
 import com.pos_sales.model.TransactionModel;
 import com.pos_sales.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -77,5 +78,16 @@ public class TransactionController {
 			            // You can return an error response or appropriate HTTP status code (e.g., 404 Not Found)
 			            return null;
 			        }
-			    }				
+			    }
+
+				@GetMapping("/gross-sales")
+				public ResponseEntity<Double> getGrossSales() {
+					Double grossSales = tserv.computeGrossSales();
+
+					if (grossSales != null) {
+						return ResponseEntity.ok(grossSales);
+					} else {
+						return ResponseEntity.notFound().build();
+					}
+				}
 }

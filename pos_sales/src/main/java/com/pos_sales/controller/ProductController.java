@@ -19,7 +19,7 @@ public class ProductController {
 		ProductService pserv;
 
 		//Test
-				@GetMapping("/print")
+			@GetMapping("/print")
 				public String printHelloProduct() {
 					return "Hello, Product!";
 				}
@@ -59,7 +59,8 @@ public class ProductController {
 				public String deleteProduct(@PathVariable int productid) {
 					return pserv.deleteProduct(productid); 
 				}
-				
+
+				// Display most purchased
 			    @GetMapping("/most-purchased")
 			    public ResponseEntity<ProductModel> getMostPurchasedProduct() {
 			        // Call the service to retrieve the most purchased product
@@ -70,9 +71,9 @@ public class ProductController {
 			        } else {
 			            return ResponseEntity.notFound().build();
 			        }
-			    }				
+			    }
 				
-			 // Decrease quantity of a product
+			 	// Decrease quantity of a product
 			    @PutMapping("/decreaseQuantity/{productid}")
 			    public ResponseEntity<String> decreaseQuantity(
 			            @PathVariable int productid,
@@ -85,7 +86,6 @@ public class ProductController {
 			            return ResponseEntity.badRequest().body(e.getMessage());
 			        }
 			    }
-
 
 			    // Increment purchase count of a product by a specified quantity
 			    @PutMapping("/incrementPurchaseCount/{productid}")

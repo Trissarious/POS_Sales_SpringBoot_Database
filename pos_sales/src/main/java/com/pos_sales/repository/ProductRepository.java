@@ -1,11 +1,10 @@
 package com.pos_sales.repository;
 
-import java.util.List;
-
+import com.pos_sales.model.ProductModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pos_sales.model.ProductModel;
+import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductModel, Integer>{
@@ -13,5 +12,5 @@ public interface ProductRepository extends JpaRepository<ProductModel, Integer>{
 
         List<ProductModel> findAllByIsDeletedFalse();
         ProductModel findByProductnameAndIsDeletedFalse(String productname); 
-         ProductModel findTopByOrderByPurchaseCountDesc();
+        ProductModel findTopByOrderByPurchaseCountDesc();
 }
