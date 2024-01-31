@@ -6,6 +6,7 @@ import com.pos_sales.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -53,6 +54,7 @@ public class TransactionService {
 					transaction.setRefunded(newTransactionDetails.isRefunded());
 					transaction.setReturned(newTransactionDetails.isReturned());
 					transaction.setProduct(newTransactionDetails.getProduct());
+					transaction.setCashier(newTransactionDetails.getCashier());
 					
 					//Step 3 - save the information and return the value
 					return trepo.save(transaction);
@@ -130,4 +132,58 @@ public class TransactionService {
 		        }
 		    }
 
+			public Double computeNetSales() {
+				// Calculate net sales based on gross sales and deductions
+				Double grossSales = trepo.computeGrossSales();
+				Double deductions = computeDeductions(); // Implement this method to calculate deductions
+				Double netSales = grossSales - deductions;
+
+				return netSales;
+			}
+
+			private Double computeDeductions() {
+				// Logic to compute deductions like returns, discounts, and allowances
+				Double returnedPrices = computeReturnedPrices();
+				Double refundedPrices = computeRefundedPrices();
+
+				Double totalDeductions = returnedPrices + refundedPrices;
+
+				return totalDeductions;
+			}
+
+			public Double computeReturnedPrices() {
+				List<TransactionModel> returnedTransactions = trepo.findByReturned(true);
+				Double returnedPrices = 0.0;
+				for (TransactionModel transaction : returnedTransactions) {
+					returnedPrices += transaction.getTotal_price();
+				}
+				return returnedPrices;
+			}
+
+			public Double computeRefundedPrices() {
+				List<TransactionModel> refundedTransactions = trepo.findByRefunded(true);
+				Double refundedPrices = 0.0;
+				for (TransactionModel transaction : refundedTransactions) {
+					refundedPrices += transaction.getTotal_price();
+				}
+				return refundedPrices;
+			}
+
+			public List<ProductModel> getReturnedProducts() {
+					List<TransactionModel> returnedTransactions = trepo.findByReturned(true);
+				List<ProductModel> returnedProducts = new ArrayList<>();
+				for (TransactionModel transaction : returnedTransactions) {
+					returnedProducts.addAll(transaction.getProduct()); // Assuming you have a method to retrieve products associated with a transaction
+				}
+				return returnedProducts;
+			}
+
+			public List<ProductModel> getRefundedProducts() {
+				List<TransactionModel> refundedTransactions = trepo.findByRefunded(true);
+				List<ProductModel> refundedProducts = new ArrayList<>();
+				for (TransactionModel transaction : refundedTransactions) {
+					refundedProducts.addAll(transaction.getProduct()); // Assuming you have a method to retrieve products associated with a transaction
+				}
+				return refundedProducts;
+			}
 }

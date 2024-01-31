@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionModel, Integer>{
@@ -12,4 +14,8 @@ public interface TransactionRepository extends JpaRepository<TransactionModel, I
 
 		@Query(value = "SELECT SUM(total_price) FROM TransactionModel")
 		Double computeGrossSales();
+
+		List<TransactionModel> findByReturned(boolean returned);
+
+		List<TransactionModel> findByRefunded(boolean refunded);
 }

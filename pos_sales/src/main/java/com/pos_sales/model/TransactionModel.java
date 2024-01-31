@@ -15,7 +15,7 @@ import java.util.List;
 		@Id
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
 	    private int transactionid;
-	    
+
 	    private int total_quantity;
 	    private double total_price;
 	    private double tendered_bill;
@@ -27,15 +27,19 @@ import java.util.List;
 	    private boolean refunded;
 	    private boolean returned;
 
+		private String cashier;
+
+		private Double netSales;
+
 	    @Column(unique = false)
-	    @OneToMany
+	    @ManyToMany
 	    public List<ProductModel> product;
-	    
-	    
+
+
 	    public TransactionModel() {}
-	    
-	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name, 
-	    		String customer_num, String customer_email, String date_time, boolean refunded, boolean returned, List<ProductModel> product) {
+
+	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name,
+	    		String customer_num, String customer_email, String date_time, boolean refunded, boolean returned, List<ProductModel> product, double netSales, String cashier) {
 	    	super();
 	        this.transactionid = transactionid;
 	        this.total_quantity = total_quantity;
@@ -49,10 +53,28 @@ import java.util.List;
 	        this.refunded = refunded;
 	        this.returned= returned;
 	        this.product = product;
+			this.netSales = netSales;
+			this.cashier = cashier;
 	    }
 
-	    
+
 	    //SETTERS AND GETTERS
+
+		public String getCashier() {
+			return cashier;
+		}
+
+		public void setCashier(String cashier) {
+			this.cashier = cashier;
+		}
+
+		public Double getNetSales() {
+			return netSales;
+		}
+
+		public void setNetSales(Double netSales) {
+			this.netSales = netSales;
+		}
 
 		public String getDate_time() {
 			return date_time;
@@ -89,10 +111,6 @@ import java.util.List;
 		public int getTransactionid() {
 			return transactionid;
 		}
-
-//		public void setTransactionid(int transactionid) {
-//			this.transactionid = transactionid;
-//		}
 
 		public int getTotal_quantity() {
 			return total_quantity;
@@ -151,5 +169,5 @@ import java.util.List;
 		}
 
 
-	    
+
 }

@@ -90,4 +90,39 @@ public class TransactionController {
 						return ResponseEntity.notFound().build();
 					}
 				}
+
+				@GetMapping("/net-sales")
+				public ResponseEntity<Double> getNetSales() {
+					Double netSales = tserv.computeNetSales();
+
+					if (netSales != null) {
+						return ResponseEntity.ok(netSales);
+					} else {
+						return ResponseEntity.notFound().build();
+					}
+				}
+
+				@GetMapping("/returned-prices")
+				public ResponseEntity<Double> getReturnedPrices() {
+					Double returnedPrices = tserv.computeReturnedPrices();
+					return ResponseEntity.ok(returnedPrices);
+				}
+
+				@GetMapping("/returned-products")
+				public ResponseEntity<List<ProductModel>> getReturnedProducts() {
+					List<ProductModel> returnedProducts = tserv.getReturnedProducts();
+					return ResponseEntity.ok(returnedProducts);
+				}
+
+				@GetMapping("/refunded-prices")
+				public ResponseEntity<Double> getRefundedPrices() {
+					Double refundedPrices = tserv.computeRefundedPrices();
+					return ResponseEntity.ok(refundedPrices);
+				}
+
+				@GetMapping("/refunded-products")
+				public ResponseEntity<List<ProductModel>> getRefundedProducts() {
+					List<ProductModel> refundedProducts = tserv.getRefundedProducts();
+					return ResponseEntity.ok(refundedProducts);
+				}
 }
