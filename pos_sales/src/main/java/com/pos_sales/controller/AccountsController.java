@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("https://dilven.vercel.app/")
+@CrossOrigin("https://dilven.vercel.app")
 public class AccountsController {
 
 		@Autowired
@@ -30,13 +30,13 @@ public class AccountsController {
 				public String printHelloUser() {
 					return "Hello, User!";
 				}
-				@CrossOrigin("https://dilven.vercel.app/")
+				@CrossOrigin("https://dilven.vercel.app")
 				//Create or insert a user record
 				@PostMapping("/postUser")
 				public AccountsModel insertAccount(@RequestBody AccountsModel account) {
 					return aserv.insertAccount(account);
 				}
-				@CrossOrigin("https://dilven.vercel.app/")
+				@CrossOrigin("https://dilven.vercel.app")
 				//Read all records
 				@GetMapping("/getAllUser")
 				public List<AccountsModel> getAllUser(){
@@ -128,7 +128,7 @@ public class AccountsController {
 						}
 					}
 				}
-				@CrossOrigin("https://dilven.vercel.app/")
+				@CrossOrigin("https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
 				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -207,7 +207,7 @@ public class AccountsController {
 			    	return UUID.randomUUID().toString();
 			    }
 			    
-			    @CrossOrigin(origins = "https://dilven.vercel.app/")
+			    @CrossOrigin(origins = "https://dilven.vercel.app")
 			  //Update a record
 				@PutMapping("/changepassword")
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
