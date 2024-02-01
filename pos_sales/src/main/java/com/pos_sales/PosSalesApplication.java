@@ -33,7 +33,7 @@ public class PosSalesApplication {
 							.allowedOrigins("https://dilven.vercel.app")
 							.allowedMethods("*")
 							.allowedHeaders("*")
-							.allowCredentials(false)
+							.allowCredentials(true)
 							.exposedHeaders("Access-Control-Allow-Origin"); // Expose the Access-Control-Allow-Origin header
 				}
 			};
