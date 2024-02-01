@@ -84,19 +84,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Cashier".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
@@ -133,19 +133,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Sales Manager".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
@@ -206,19 +206,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
