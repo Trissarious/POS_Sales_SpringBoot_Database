@@ -16,10 +16,9 @@ import java.util.List;
 import java.util.UUID;
 
 
-
+@CrossOrigin("https://dilven.vercel.app")
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("https://dilven.vercel.app")
 public class AccountsController {
 
 		@Autowired
@@ -133,7 +132,7 @@ public class AccountsController {
 				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
-					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+					if (user != null && user.getPassword() != null && user.getPassword().equals(loginRequest.getPassword())) {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
@@ -144,7 +143,7 @@ public class AccountsController {
 						}
 					} else {
 						// Handle invalid credentials
-						if (user != null && user.getPassword().equals(null)) {
+						if (user != null && user.getPassword() == null) {
 							// Specific message for missing password
 							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
 						} else {
