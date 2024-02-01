@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
 	    private String contactnum;
 		@Column(nullable=false)
 	    private String gender;
-		@Column(nullable=false)
 	    private String bday;
 	    private String resetToken;
 	    private LocalDateTime resetTokenExpiration;
