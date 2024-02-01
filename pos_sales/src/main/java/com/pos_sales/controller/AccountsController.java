@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin(origins = "https://dilven.vercel.app/")
+@CrossOrigin("https://dilven.vercel.app/")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
@@ -75,79 +75,150 @@ public class AccountsController {
 				    }
 				}
 
-				@CrossOrigin(origins = "https://dilven.vercel.app")
+				//@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/logincash"})
-				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<?> logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 						// Successful authentication
 						if ("Cashier".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(HttpStatus.OK);
+							return new ResponseEntity<>(user, HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
-				@CrossOrigin(origins = "https://dilven.vercel.app")
+//				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
+//					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+//
+//					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+//						// Successful authentication
+//						if ("Cashier".equals(user.getAccount_type())) {
+//							// Return user object for successful admin login
+//							return new ResponseEntity<>(HttpStatus.OK);
+//						} else {
+//							// Deny access for other account types
+//							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+//						}
+//					} else {
+//						// Handle invalid credentials
+//						if (user != null && user.getPassword().equals(null)) {
+//							// Specific message for missing password
+//							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//						} else {
+//							// General message for invalid credentials
+//							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//						}
+//					}
+//				}
+				
+				//@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginsales"})
-				public ResponseEntity<String> loginsales(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 						// Successful authentication
 						if ("Sales Manager".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(HttpStatus.OK);
+							return new ResponseEntity<>(user, HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
+//				public ResponseEntity<String> loginsales(@RequestBody AccountsModel loginRequest) {
+//					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+//
+//					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+//						// Successful authentication
+//						if ("Sales Manager".equals(user.getAccount_type())) {
+//							// Return user object for successful admin login
+//							return new ResponseEntity<>(HttpStatus.OK);
+//						} else {
+//							// Deny access for other account types
+//							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+//						}
+//					} else {
+//						// Handle invalid credentials
+//						if (user != null && user.getPassword().equals(null)) {
+//							// Specific message for missing password
+//							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//						} else {
+//							// General message for invalid credentials
+//							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//						}
+//					}
+//				}
 
-				@CrossOrigin(origins = "https://dilven.vercel.app")
+				//@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
-				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
+//				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
+//					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+//
+//					if (user != null && user.getPassword().equals(loginRequest.getPassword()))  {
+//						// Successful authentication
+//						if ("Administrator".equals(user.getAccount_type())) {
+//							// Return user object for successful admin login
+//							return new ResponseEntity<>( HttpStatus.OK);
+//						} else {
+//							// Deny access for other account types
+//							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//						}
+//					} else {
+//						// Handle invalid credentials
+//						if (user != null && user.getPassword().equals(null)) {
+//							// Specific message for missing password
+//							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//						} else {
+//							// General message for invalid credentials
+//							return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
+//						}
+//					}
+//				}
+				
+				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
-					if (user != null && user.getPassword().equals(loginRequest.getPassword()))  {
+					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>( HttpStatus.OK);
+							return new ResponseEntity<>(user, HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
@@ -205,7 +276,7 @@ public class AccountsController {
 			    	return UUID.randomUUID().toString();
 			    }
 			    
-			    @CrossOrigin(origins = "https://dilven.vercel.app")
+			    //@CrossOrigin(origins = "https://dilven.vercel.app")
 			  //Update a record
 				@PutMapping("/changepassword")
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
