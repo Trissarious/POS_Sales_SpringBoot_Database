@@ -33,7 +33,7 @@ public class PosSalesApplication {
 							.allowedOrigins("https://dilven.vercel.app")
 							.allowedMethods("*")
 							.allowedHeaders("*")
-							.allowCredentials(true)
+							.allowCredentials(false)
 							.exposedHeaders("Access-Control-Allow-Origin"); // Expose the Access-Control-Allow-Origin header
 				}
 			};
@@ -46,5 +46,6 @@ public class PosSalesApplication {
 			http.cors().and().csrf().disable();
 		}
 	}
+
 
 }
