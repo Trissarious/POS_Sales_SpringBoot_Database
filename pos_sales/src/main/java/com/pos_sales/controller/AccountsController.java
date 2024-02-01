@@ -16,9 +16,10 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin("https://dilven.vercel.app/")
 @RestController
 @RequestMapping("/user")
+//@CrossOrigin("https://dilven.vercel.app/")
+@CrossOrigin(origins = "https://dilven.vercel.app/")
 public class AccountsController {
 
 		@Autowired
@@ -63,7 +64,8 @@ public class AccountsController {
 					return
 							aserv.deleteAccount(userid);
 				}
-				@PostMapping("/com/pos_sales/service/login")
+				
+				@PostMapping("/login")
 				public ResponseEntity<String> login(@RequestBody AccountsModel loginRequest) {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
