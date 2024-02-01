@@ -9,27 +9,22 @@ import java.time.LocalDateTime;
 		@Id
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
 	    private int userid;
-		@Column(nullable=false, unique = true)
+		@Column( unique = true)
 	    private String username;
-		@Column(nullable=false)
+
 	    private String password;
-		@Column(nullable=false)
+
 	    private String account_type;
-		@Column(nullable = false, unique = true)
+		@Column( unique = true)
 	    private String email;
-		@Column(nullable=false)
+
 	    private String fname;
-		@Column(nullable=false)
+
 	    private String lname;
-		@Column(nullable=false)
 	    private String business_name;
-		@Column(nullable=false)
 	    private String address;
-		@Column(nullable=false)
 	    private String contactnum;
-		@Column(nullable=false)
 	    private String gender;
-		@Column(nullable=false)
 	    private String bday;
 	    private String resetToken;
 	    private LocalDateTime resetTokenExpiration;

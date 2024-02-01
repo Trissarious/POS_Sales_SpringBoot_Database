@@ -1,12 +1,12 @@
 package com.pos_sales;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailService {
@@ -22,7 +22,7 @@ public class EmailService {
         try {
             helper.setTo(toEmail);
             helper.setSubject("Password Reset");
-            helper.setText("<p>Click <a href='http://localhost:3000/forgotpassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
+            helper.setText("<p>Click <a href='https://dilven-springboot.onrender.com/forgotpassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
 
             javaMailSender.send(message);
             
