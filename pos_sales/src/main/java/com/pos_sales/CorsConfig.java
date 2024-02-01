@@ -52,7 +52,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 registry.addMapping("/logincash")
                         .allowedOrigins("https://dilven.vercel.app")
                         .allowedMethods("OPTIONS", "POST")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .exposedHeaders("Access-Control-Allow-Origin");
             }
         };
     }
