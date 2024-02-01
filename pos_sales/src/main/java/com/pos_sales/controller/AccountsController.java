@@ -125,7 +125,7 @@ public class AccountsController {
 						}
 					}
 				}
-				@CrossOrigin(origins = "https://dilven.vercel.app/")
+				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
 				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
