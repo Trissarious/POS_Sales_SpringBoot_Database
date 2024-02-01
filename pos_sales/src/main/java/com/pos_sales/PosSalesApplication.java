@@ -28,7 +28,7 @@ public class PosSalesApplication {
 				public void addCorsMappings(CorsRegistry registry) {
 					registry.addMapping("/**")
 							.allowedOrigins("https://dilven.vercel.app")
-							.allowedMethods("GET", "POST", "PUT", "DELETE")
+							.allowedMethods("*")
 							.allowedHeaders("*")
 							.allowCredentials(true)
 							.exposedHeaders("Access-Control-Allow-Origin"); // Expose the Access-Control-Allow-Origin header

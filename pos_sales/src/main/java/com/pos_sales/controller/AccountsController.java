@@ -23,9 +23,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
-	protected void configure(HttpSecurity http) throws Exception {
-		http.cors();
-	}
+
+		protected void configure(HttpSecurity http) throws Exception {
+			http.cors();
+		}
 		@Autowired
 		AccountsService aserv;
 
