@@ -13,12 +13,14 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("*")
+                registry.addMapping("/**")
                         .allowedOrigins("https://dilven.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(true)
+                        .exposedHeaders("Access-Control-Allow-Origin"); // Expose the Access-Control-Allow-Origin header
             }
         };
     }
+
 }
