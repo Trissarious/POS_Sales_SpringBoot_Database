@@ -2,7 +2,6 @@ package com.pos_sales.controller;
 
 import com.pos_sales.model.AccountsModel;
 import com.pos_sales.service.AccountsService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +77,7 @@ public class AccountsController {
 
 				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/logincash"})
-				public ResponseEntity<?> logincash(@NotNull @RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -103,7 +102,7 @@ public class AccountsController {
 				}
 				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginsales"})
-				public ResponseEntity<?> loginsales(@NotNull @RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -128,7 +127,7 @@ public class AccountsController {
 				}
 				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
-				public ResponseEntity<?> loginad(@NotNull @RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword() != null && user.getPassword().equals(loginRequest.getPassword())) {
