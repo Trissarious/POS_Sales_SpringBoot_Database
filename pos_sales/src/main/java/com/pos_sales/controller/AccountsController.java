@@ -30,13 +30,13 @@ public class AccountsController {
 				public String printHelloUser() {
 					return "Hello, User!";
 				}
-		
+				@CrossOrigin("https://dilven.vercel.app/")
 				//Create or insert a user record
 				@PostMapping("/postUser")
 				public AccountsModel insertAccount(@RequestBody AccountsModel account) {
 					return aserv.insertAccount(account);
 				}
-				
+				@CrossOrigin("https://dilven.vercel.app/")
 				//Read all records
 				@GetMapping("/getAllUser")
 				public List<AccountsModel> getAllUser(){
@@ -128,7 +128,7 @@ public class AccountsController {
 						}
 					}
 				}
-
+				@CrossOrigin("https://dilven.vercel.app/")
 				@PostMapping({"/loginad"})
 				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
