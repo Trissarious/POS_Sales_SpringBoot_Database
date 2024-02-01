@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven.vercel.app/")
 @RequestMapping("/transaction")
 public class TransactionController {
 
