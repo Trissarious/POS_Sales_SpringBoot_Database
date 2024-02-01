@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin(origins = "https://dilven.vercel.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
 
 		@Autowired

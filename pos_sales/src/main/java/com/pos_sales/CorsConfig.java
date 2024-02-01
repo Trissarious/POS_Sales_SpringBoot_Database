@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class WebConfig implements WebMvcConfigurer {
+public class CorsConfig  implements WebMvcConfigurer {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -22,7 +22,6 @@ public class WebConfig implements WebMvcConfigurer {
                         .allowCredentials(true)
                         .exposedHeaders("Access-Control-Allow-Origin");
             }
-
+        };
     }
-
 }
