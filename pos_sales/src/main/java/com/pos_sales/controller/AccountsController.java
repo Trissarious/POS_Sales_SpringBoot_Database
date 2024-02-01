@@ -2,6 +2,7 @@ package com.pos_sales.controller;
 
 import com.pos_sales.model.AccountsModel;
 import com.pos_sales.service.AccountsService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin(origins = "https://dilven.vercel.app/user/")
+@CrossOrigin(origins = "https://dilven.vercel.app")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
@@ -75,8 +76,9 @@ public class AccountsController {
 				    }
 				}
 
+				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/logincash"})
-				public ResponseEntity<?> logincash(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<?> logincash(@NotNull @RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -99,8 +101,9 @@ public class AccountsController {
 						}
 					}
 				}
+				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginsales"})
-				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<?> loginsales(@NotNull @RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -123,9 +126,9 @@ public class AccountsController {
 						}
 					}
 				}
-				@CrossOrigin("https://dilven.vercel.app")
+				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
-				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<?> loginad(@NotNull @RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword() != null && user.getPassword().equals(loginRequest.getPassword())) {
