@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin("https://dilven.vercel.app")
+@CrossOrigin(origins = "https://dilven.vercel.app")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
