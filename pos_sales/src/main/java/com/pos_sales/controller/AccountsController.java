@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin(origins = "https://dilven.vercel.app")
+@CrossOrigin(origins = "https://dilven.vercel.app/")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
@@ -125,16 +125,16 @@ public class AccountsController {
 						}
 					}
 				}
-				@CrossOrigin(origins = "https://dilven.vercel.app")
+				@CrossOrigin(origins = "https://dilven.vercel.app/")
 				@PostMapping({"/loginad"})
 				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
-					if (user != null && user.getPassword() != null && user.getPassword().equals(loginRequest.getPassword())) {
+					if (user != null && user.getPassword().equals(loginRequest.getPassword()))  {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(HttpStatus.OK);
+							return new ResponseEntity<>("Login successful", HttpStatus.OK);
 						} else {
 							// Deny access for other account types
 							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
