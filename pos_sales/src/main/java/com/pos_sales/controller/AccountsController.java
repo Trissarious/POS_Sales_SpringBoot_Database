@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -18,15 +16,11 @@ import java.util.List;
 import java.util.UUID;
 
 
-@EnableWebSecurity
 @CrossOrigin(origins = "https://dilven.vercel.app/")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
 
-		protected void configure(HttpSecurity http) throws Exception {
-			http.cors();
-		}
 		@Autowired
 		AccountsService aserv;
 
@@ -74,10 +68,10 @@ public class AccountsController {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 				        // Successful login
-				        return new ResponseEntity<>("Login successful" + user, HttpStatus.OK);
+				        return new ResponseEntity<>(HttpStatus.OK);
 				    } else {
 				        // Failed login
-				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+				        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 				    }
 				}
 
@@ -90,19 +84,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Cashier".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>("Login Successful", HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
@@ -115,19 +109,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Sales Manager".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>("Login Successful", HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>( HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
@@ -141,19 +135,19 @@ public class AccountsController {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>("Login successful", HttpStatus.OK);
+							return new ResponseEntity<>( HttpStatus.OK);
 						} else {
 							// Deny access for other account types
-							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						}
 					} else {
 						// Handle invalid credentials
 						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
-							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
+							return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 						} else {
 							// General message for invalid credentials
-							return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+							return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
 						}
 					}
 				}
