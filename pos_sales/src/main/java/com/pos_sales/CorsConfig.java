@@ -2,9 +2,10 @@ package com.pos_sales;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class CorsConfig {
     
 //    @Bean
@@ -22,19 +23,23 @@ public class CorsConfig {
 //    	return http.build();
 //    	
 //    }
+	
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http
+	            .csrf().disable()
+	            .cors(cors->cors.disable())
+	            .authorizeRequests()
+	            .antMatchers("/**")
+	            .permitAll()
+	            .anyRequest()
+	            .authenticated()
+	            .and()
+	            .sessionManagement()
+	            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	    return http.build();
+	}
     		
-    @Bean
-    public CorsConfigurationSource corsConfigSource() {
-    	CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://dilven.vercel.app");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
-    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -48,4 +53,18 @@ public class CorsConfig {
             }
         };
     }
+    
+    @Bean
+    public CorsConfigurationSource corsConfigSource() {
+    	CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("https://dilven.vercel.app");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+    
+   
 }

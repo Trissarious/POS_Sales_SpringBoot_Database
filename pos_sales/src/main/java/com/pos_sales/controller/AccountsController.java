@@ -66,7 +66,7 @@ public class AccountsController {
 				}
 				
 				@PostMapping("/login")
-				public ResponseEntity<String> login(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity login(@RequestBody AccountsModel loginRequest) {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 				        // Successful login
@@ -78,8 +78,8 @@ public class AccountsController {
 				}
 
 				//@CrossOrigin(origins = "https://dilven.vercel.app")
-				@PostMapping({"/logincash"})
-				public ResponseEntity<?> logincash(@RequestBody AccountsModel loginRequest) {
+				@PostMapping("/logincash")
+				public ResponseEntity logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -127,8 +127,8 @@ public class AccountsController {
 //				}
 				
 				//@CrossOrigin(origins = "https://dilven.vercel.app")
-				@PostMapping({"/loginsales"})
-				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
+				@PostMapping("/loginsales")
+				public ResponseEntity loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -176,7 +176,7 @@ public class AccountsController {
 //				}
 
 				//@CrossOrigin(origins = "https://dilven.vercel.app")
-				@PostMapping({"/loginad"})
+				@PostMapping("/loginad")
 //				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 //					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 //
@@ -201,7 +201,7 @@ public class AccountsController {
 //					}
 //				}
 				
-				public ResponseEntity<?> loginad(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
