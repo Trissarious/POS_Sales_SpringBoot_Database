@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 registry.addMapping("/**")
                         .allowedOrigins("https://dilven.vercel.app")
                         .allowedMethods("*")
-                        .allowedHeaders("*")
+                        .allowedHeaders("Content_Type", "Authorization")
                         .allowCredentials(true)
                         .exposedHeaders("Access-Control-Allow-Origin");
             }
