@@ -21,13 +21,17 @@ public class PosSalesApplication {
 //	public void sendMail() {
 //		senderService.sendResetEmail("trishajoyoballo@gmail.com", "");
 //	}
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("*").allowedOrigins("https://dilven.vercel.app");
-			}
-		};
-	}
+@Bean
+public WebMvcConfigurer corsConfigurer() {
+	return new WebMvcConfigurer() {
+		@Override
+		public void addCorsMappings(CorsRegistry registry) {
+			registry.addMapping("*")
+					.allowedOrigins("https://dilven.vercel.app")
+					.allowedMethods("GET", "POST", "PUT", "DELETE")
+					.allowedHeaders("*")
+					.allowCredentials(true);
+		}
+	};
+}
 }
