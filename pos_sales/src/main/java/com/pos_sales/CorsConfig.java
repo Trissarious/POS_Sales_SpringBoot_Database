@@ -3,10 +3,12 @@ package com.pos_sales;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class CorsConfig {
+@EnableWebMvc
+public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -15,12 +17,12 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("https://dilven.vercel.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true)
                         .exposedHeaders("Access-Control-Allow-Origin");
             }
-        };
+
     }
 
 }
