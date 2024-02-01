@@ -141,7 +141,7 @@ public class AccountsController {
 						}
 					} else {
 						// Handle invalid credentials
-						if (user != null && user.getPassword() == null) {
+						if (user != null && user.getPassword().equals(null)) {
 							// Specific message for missing password
 							return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
 						} else {
