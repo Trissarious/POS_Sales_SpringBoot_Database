@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@CrossOrigin("https://dilven.vercel.app")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
@@ -29,13 +29,12 @@ public class AccountsController {
 				public String printHelloUser() {
 					return "Hello, User!";
 				}
-				@CrossOrigin("https://dilven.vercel.app")
 				//Create or insert a user record
 				@PostMapping("/postUser")
 				public AccountsModel insertAccount(@RequestBody AccountsModel account) {
 					return aserv.insertAccount(account);
 				}
-				@CrossOrigin("https://dilven.vercel.app")
+
 				//Read all records
 				@GetMapping("/getAllUser")
 				public List<AccountsModel> getAllUser(){
@@ -58,14 +57,12 @@ public class AccountsController {
 				public AccountsModel putAccounts(@RequestParam int userid, @RequestBody AccountsModel newAccountsDetails) throws Exception{
 					return aserv.putAccounts(userid, newAccountsDetails);
 				}
-				@CrossOrigin("https://dilven.vercel.app")
 				//Delete a record
 				@DeleteMapping("/deleteAccount/{userid}")
 				public String deleteAccount(@PathVariable int userid) {
 					return
 							aserv.deleteAccount(userid);
 				}
-				@CrossOrigin("https://dilven.vercel.app")
 				@PostMapping("/com/pos_sales/service/login")
 				public ResponseEntity<String> login(@RequestBody AccountsModel loginRequest) {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -77,7 +74,7 @@ public class AccountsController {
 				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 				    }
 				}
-				@CrossOrigin("https://dilven.vercel.app")
+
 				@PostMapping({"/logincash"})
 				public ResponseEntity<?> logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -102,7 +99,6 @@ public class AccountsController {
 						}
 					}
 				}
-				@CrossOrigin("https://dilven.vercel.app")
 				@PostMapping({"/loginsales"})
 				public ResponseEntity<?> loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
