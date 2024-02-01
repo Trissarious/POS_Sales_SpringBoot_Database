@@ -83,7 +83,7 @@ public class AccountsController {
 						// Successful authentication
 						if ("Cashier".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>("Login Successful", HttpStatus.OK);
 						} else {
 							// Deny access for other account types
 							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
@@ -107,7 +107,7 @@ public class AccountsController {
 						// Successful authentication
 						if ("Sales Manager".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>("Login Successful", HttpStatus.OK);
 						} else {
 							// Deny access for other account types
 							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
@@ -132,7 +132,7 @@ public class AccountsController {
 						// Successful authentication
 						if ("Administrator".equals(user.getAccount_type())) {
 							// Return user object for successful admin login
-							return new ResponseEntity<>(user, HttpStatus.OK);
+							return new ResponseEntity<>(HttpStatus.OK);
 						} else {
 							// Deny access for other account types
 							return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
