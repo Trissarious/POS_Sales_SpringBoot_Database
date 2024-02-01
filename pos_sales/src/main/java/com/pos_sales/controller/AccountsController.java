@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -16,11 +18,14 @@ import java.util.List;
 import java.util.UUID;
 
 
+@EnableWebSecurity
 @CrossOrigin(origins = "https://dilven.vercel.app/")
 @RestController
 @RequestMapping("/user")
 public class AccountsController {
-
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors();
+	}
 		@Autowired
 		AccountsService aserv;
 
@@ -125,6 +130,7 @@ public class AccountsController {
 						}
 					}
 				}
+
 				@CrossOrigin(origins = "https://dilven.vercel.app")
 				@PostMapping({"/loginad"})
 				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
