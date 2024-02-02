@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 //@EnableWebSecurity
-public class CorsConfig {
+public class WebConfig implements WebMvcConfigurer {
     
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -24,35 +24,31 @@ public class CorsConfig {
 //    	
 //    }
 	
-//	@Bean
-//	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//	    http
-//	            .csrf().disable()
-//	            .cors(cors->cors.disable())
-//	            .authorizeRequests()
-//	            .antMatchers("/**")
-//	            .permitAll()
-//	            .anyRequest()
-//	            .authenticated()
-//	            .and()
-//	            .sessionManagement()
-//	            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//	    return http.build();
-//	}
+	
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/user/logincash")
+		.allowedOrigins("https://dilven.vercel.app")
+		.allowedMethods("GET", "POST")
+		.allowedHeaders("Content-Type", "Authorization")
+		.allowCredentials(true)
+		.maxAge(3600);
+	}
+	
     		
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("https://dilven-pos.vercel.app")
-                        .allowedMethods("*")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("https://dilven-pos.vercel.app")
+//                        .allowedMethods("*")
+//                        .allowedHeaders("*")
+//                        .allowCredentials(true);
+//            }
+//        };
+//    }
     
     @Bean
     public CorsConfigurationSource corsConfigSource() {

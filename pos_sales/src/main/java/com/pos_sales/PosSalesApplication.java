@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import(CorsConfig.class)
+@Import(WebConfig.class)
 public class PosSalesApplication {
 
 	@Autowired

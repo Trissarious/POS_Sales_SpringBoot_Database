@@ -18,8 +18,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-//@CrossOrigin("https://dilven.vercel.app/")
-@CrossOrigin(origins = "https://dilven.vercel.app")
+@CrossOrigin("dilven.vercel.app")
+//@CrossOrigin(origins = "https://dilven.vercel.app")
 public class AccountsController {
 
 		@Autowired
@@ -66,7 +66,7 @@ public class AccountsController {
 				}
 				
 				@PostMapping("/login")
-				public ResponseEntity login(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> login(@RequestBody AccountsModel loginRequest) {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
 				        // Successful login
@@ -77,9 +77,9 @@ public class AccountsController {
 				    }
 				}
 
-				//@CrossOrigin(origins = "https://dilven.vercel.app")
+				@CrossOrigin("dilven.vercel.app")
 				@PostMapping("/logincash")
-				public ResponseEntity logincash(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -126,9 +126,9 @@ public class AccountsController {
 //					}
 //				}
 				
-				//@CrossOrigin(origins = "https://dilven.vercel.app")
+				@CrossOrigin("dilven.vercel.app")
 				@PostMapping("/loginsales")
-				public ResponseEntity loginsales(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity <String>loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
@@ -176,7 +176,7 @@ public class AccountsController {
 //				}
 
 				//@CrossOrigin(origins = "https://dilven.vercel.app")
-//				@PostMapping("/loginad")
+//				
 //				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 //					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 //
@@ -200,8 +200,9 @@ public class AccountsController {
 //						}
 //					}
 //				}
+				@CrossOrigin("dilven.vercel.app")
 				@PostMapping("/loginad")
-				public ResponseEntity loginad(@RequestBody AccountsModel loginRequest) {
+				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
 
 					if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
