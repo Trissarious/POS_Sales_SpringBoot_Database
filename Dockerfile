@@ -3,6 +3,6 @@ COPY . .
 RUN mvn clean package
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/pos_sales-0.0.1-SNAPSHOT.jar pos_sales.jar
+COPY target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","pos_sales.jar"]
