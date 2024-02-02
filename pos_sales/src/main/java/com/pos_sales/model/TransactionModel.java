@@ -1,14 +1,10 @@
 package com.pos_sales.model;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@RestController
-@CrossOrigin("http://localhost:3000")
 @Table(name="tbl_transaction")
 	public class TransactionModel {
 

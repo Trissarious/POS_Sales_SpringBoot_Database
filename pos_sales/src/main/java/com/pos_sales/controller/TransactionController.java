@@ -6,13 +6,12 @@ import com.pos_sales.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 
 @RestController
-@CrossOrigin("https://dilven.vercel.app")
+@CrossOrigin(origins = "https://dilven.vercel.app")
 @RequestMapping("/transaction")
 public class TransactionController {
 

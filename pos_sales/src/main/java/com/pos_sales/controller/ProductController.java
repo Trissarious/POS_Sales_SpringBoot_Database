@@ -6,14 +6,13 @@ import com.pos_sales.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin("https://dilven.vercel.app")
+@CrossOrigin(origins = "https://dilven.vercel.app")
 public class ProductController {
 
 		@Autowired
