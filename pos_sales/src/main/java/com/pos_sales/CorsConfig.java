@@ -14,7 +14,7 @@
                 @Override
                 public void addCorsMappings(CorsRegistry registry) {
                     registry.addMapping("*")
-                            .allowedOrigins("https://dilven-pos.vercel.app")
+                            .allowedOrigins("https://dilven.vercel.app")
                             .allowedMethods("GET", "POST", "PUT", "DELETE")
                             .allowedHeaders("*")
                             .allowCredentials(true);
