@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "https://dilven.vercel.app", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin("https://dilven.vercel.app")
 public class AccountsController {
 
 		@Autowired
