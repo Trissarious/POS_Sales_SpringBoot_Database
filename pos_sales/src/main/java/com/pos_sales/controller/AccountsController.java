@@ -151,7 +151,7 @@ public class AccountsController {
 		}
 	}
 
-				@PostMapping("forgotpassword") 
+				@PostMapping("/forgotpassword")
 				public ResponseEntity<String> resetPassword(@RequestBody AccountsModel resetRequest) {
 				    String email = resetRequest.getEmail();
 				    
