@@ -5,4 +5,4 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17.0.1-jdk-slim
 #VOLUME /tmp
 COPY --from=build /target/pos_sales-0.0.1-SNAPSHOT.jar pos_sales.jar
-ENTRYPOINT ["java","-jar","./app.jar"]
+ENTRYPOINT ["java","-jar","pos_sales.jar"]
