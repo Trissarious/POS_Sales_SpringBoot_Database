@@ -76,6 +76,7 @@ public class AccountsService {
 					account.setContactnum(newAccountsDetails.getContactnum());
 					account.setGender(newAccountsDetails.getGender());
 					account.setBday(newAccountsDetails.getBday());
+					account.setCashier(newAccountsDetails.getCashier());
 					
 					//Step 3 - save the information and return the value
 					return arepo.save(account);

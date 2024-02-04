@@ -26,13 +26,16 @@ import java.time.LocalDateTime;
 	    private String contactnum;
 	    private String gender;
 	    private String bday;
+
+		private String cashier;
+
 	    private String resetToken;
 	    private LocalDateTime resetTokenExpiration;
 	    
 	    public AccountsModel() {}
 	    
 	    public AccountsModel(int userid, String username, String password, String account_type, String email, String fname,  String lname
-	    		, String business_name, String address, String contactnum, String gender, String bday, String resetToken,  LocalDateTime resetTokenExpiration) {
+	    		, String business_name, String address, String contactnum, String gender, String bday, String resetToken,  LocalDateTime resetTokenExpiration, String cashier) {
 	        this.userid = userid;
 	        this.username = username;
 	        this.password = password;
@@ -46,6 +49,7 @@ import java.time.LocalDateTime;
 	        this.gender = gender;
 	        this.bday = bday;
 	        this.resetToken = resetToken;
+			this.cashier = cashier;
 	    }
 
 
@@ -89,7 +93,16 @@ import java.time.LocalDateTime;
 //			this.userid = userid;
 //		}
 
-		public String getUsername() {
+
+	public String getCashier() {
+		return cashier;
+	}
+
+	public void setCashier(String cashier) {
+		this.cashier = cashier;
+	}
+
+	public String getUsername() {
 			return username;
 		}
 

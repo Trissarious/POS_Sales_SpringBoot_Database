@@ -18,7 +18,7 @@ public class ProductModel {
     private int purchaseCount;
 
     @Column(unique = false)
-    @OneToMany
+    @ManyToMany
     public List<AccountsModel> accounts;
 
     public ProductModel() {
