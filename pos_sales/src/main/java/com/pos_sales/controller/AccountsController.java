@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "https://dilven.vercel.app", allowedHeaders = "*")
+@CrossOrigin(origins = "https://dilven.vercel.app", allowedHeaders = "*", allowCredentials = "true")
 public class AccountsController {
 
 		@Autowired
@@ -76,7 +76,6 @@ public class AccountsController {
 				    }
 				}
 
-				@CrossOrigin("https://dilven.vercel.app/logincash")
 				@PostMapping("/logincash")
 				public ResponseEntity<String> logincash(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -124,8 +123,7 @@ public class AccountsController {
 //						}
 //					}
 //				}
-				
-				@CrossOrigin("https://dilven.vercel.app/loginsales")
+
 				@PostMapping("/loginsales")
 				public ResponseEntity <String>loginsales(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -199,7 +197,6 @@ public class AccountsController {
 //						}
 //					}
 //				}
-				@CrossOrigin("https://dilven.vercel.app/loginadmin")
 				@PostMapping("/loginad")
 				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 					AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
