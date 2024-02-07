@@ -1,6 +1,5 @@
 package com.pos_sales.service;
 
-import com.pos_sales.model.AccountsModel;
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +86,12 @@ public class ProductService {
 
         return msg;
     }
-    
-    public ProductModel getMostPurchasedProduct() {
-        // Query the database to retrieve the product with the highest purchaseCount
-        return prepo.findTopByOrderByPurchaseCountDesc();
+
+    public ProductModel getMostPurchasedProductByBusiness(String business) {
+        // Query the database to retrieve the product with the highest purchaseCount for the given business
+        return prepo.findTopByBusinessOrderByPurchaseCountDesc(business);
     }
+
     
     public ProductModel decreaseQuantity(int productid, int quantityToDecrease) throws Exception {
         try {
@@ -110,8 +110,6 @@ public class ProductService {
         }
     }
 
-
-
     public ProductModel incrementPurchaseCount(int productid, int quantityPurchased) throws Exception {
         try {
             ProductModel product = prepo.findById(productid).orElseThrow(() -> new NoSuchElementException("Product " + productid + " does not exist!"));
@@ -129,17 +127,9 @@ public class ProductService {
         }
     }
 
-    // Display products purchased according to the transaction performed ^-^
-    public List<AccountsModel> getAccounts(int productid) {
-        // Find the product by userid
-        ProductModel product = prepo.findById(productid).get();
-
-        if (product != null) {
-            // Get the list of products associated with the transaction
-            return product.getAccounts();
-        } else {
-            return null;
-        }
+    public List<ProductModel> getAllProductByBusiness(String business) {
+        return prepo.findAllByBusiness(business);
     }
+
 
 }
