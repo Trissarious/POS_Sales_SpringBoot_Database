@@ -17,6 +17,8 @@ public class ProductModel {
     private boolean isDeleted;
     private int purchaseCount;
 
+    private String business;
+
     @Column(unique = false)
     @OneToMany
     public List<AccountsModel> accounts;
@@ -24,13 +26,14 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount, List<AccountsModel> accounts) {
+    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount, List<AccountsModel> accounts, String business) {
         this.productid = productid;
         this.productname = productname;
         this.quantity = quantity;
         this.price = price;
         this.purchaseCount = purchaseCount;
         this.accounts = accounts;
+        this.business = business;
     }
 
     public List<AccountsModel> getAccounts() {
@@ -43,6 +46,14 @@ public class ProductModel {
 
     public String getProductname() {
         return productname;
+    }
+
+    public String getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(String business) {
+        this.business = business;
     }
 
     public void setProductname(String productname) {

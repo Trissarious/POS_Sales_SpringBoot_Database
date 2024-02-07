@@ -30,12 +30,18 @@ public class TransactionController {
 					return tserv.insertTransaction(transaction);
 				}
 				
-				//Read all records
+//				//Read all records
+//				@GetMapping("/getAllTransaction")
+//				public List<TransactionModel> getAllTransaction(){
+//					return tserv.getAllTransaction();
+//				}
+
+				// Read all records for a specific business
 				@GetMapping("/getAllTransaction")
-				public List<TransactionModel> getAllTransaction(){
-					return tserv.getAllTransaction();
+				public List<TransactionModel> getAllTransaction(@RequestParam String business) {
+					return tserv.getAllTransactionByBusiness(business);
 				}
-				
+
 				//Read a record by transaction id
 				@GetMapping("/getByTransaction")
 				public TransactionModel findByTransactionid(@RequestParam int transactionid) {
@@ -81,8 +87,8 @@ public class TransactionController {
 			    }
 
 				@GetMapping("/gross-sales")
-				public ResponseEntity<Double> getGrossSales() {
-					Double grossSales = tserv.computeGrossSales();
+				public ResponseEntity<Double> getGrossSales(@RequestParam String business) {
+					Double grossSales = tserv.computeGrossSalesByBusiness(business);
 
 					if (grossSales != null) {
 						return ResponseEntity.ok(grossSales);
@@ -92,8 +98,8 @@ public class TransactionController {
 				}
 
 				@GetMapping("/net-sales")
-				public ResponseEntity<Double> getNetSales() {
-					Double netSales = tserv.computeNetSales();
+				public ResponseEntity<Double> getNetSales(@RequestParam String business) {
+					Double netSales = tserv.computeNetSalesByBusiness(business);
 
 					if (netSales != null) {
 						return ResponseEntity.ok(netSales);
@@ -103,26 +109,26 @@ public class TransactionController {
 				}
 
 				@GetMapping("/returned-prices")
-				public ResponseEntity<Double> getReturnedPrices() {
-					Double returnedPrices = tserv.computeReturnedPrices();
+				public ResponseEntity<Double> getReturnedPrices(@RequestParam String business) {
+					Double returnedPrices = tserv.computeReturnedPricesByBusiness(business);
 					return ResponseEntity.ok(returnedPrices);
 				}
 
 				@GetMapping("/returned-products")
-				public ResponseEntity<List<ProductModel>> getReturnedProducts() {
-					List<ProductModel> returnedProducts = tserv.getReturnedProducts();
+				public ResponseEntity<List<ProductModel>> getReturnedProducts(@RequestParam String business) {
+					List<ProductModel> returnedProducts = tserv.getReturnedProductsByBusiness(business);
 					return ResponseEntity.ok(returnedProducts);
 				}
 
 				@GetMapping("/refunded-prices")
-				public ResponseEntity<Double> getRefundedPrices() {
-					Double refundedPrices = tserv.computeRefundedPrices();
+				public ResponseEntity<Double> getRefundedPrices(@RequestParam String business) {
+					Double refundedPrices = tserv.computeRefundedPricesByBusiness(business);
 					return ResponseEntity.ok(refundedPrices);
 				}
 
 				@GetMapping("/refunded-products")
-				public ResponseEntity<List<ProductModel>> getRefundedProducts() {
-					List<ProductModel> refundedProducts = tserv.getRefundedProducts();
+				public ResponseEntity<List<ProductModel>> getRefundedProducts(@RequestParam String business) {
+					List<ProductModel> refundedProducts = tserv.getRefundedProductsByBusiness(business);
 					return ResponseEntity.ok(refundedProducts);
 				}
 }

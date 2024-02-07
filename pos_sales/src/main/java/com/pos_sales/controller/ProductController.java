@@ -1,6 +1,5 @@
 package com.pos_sales.controller;
 
-import com.pos_sales.model.AccountsModel;
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +31,20 @@ public class ProductController {
 				}
 				
 				//Read all records
+//				@GetMapping("/getAllProduct")
+//				public List<ProductModel> getAllProduct(){
+//					return pserv.getAllProduct();
+//				}
+
+				// Read all records for a specific business
 				@GetMapping("/getAllProduct")
-				public List<ProductModel> getAllProduct(){
-					return pserv.getAllProduct();
+				public List<ProductModel> getAllProduct(@RequestParam String business) {
+					return pserv.getAllProductByBusiness(business);
 				}
-				
-				//Read a record by product name
+
+
+
+	//Read a record by product name
 				@GetMapping("/getByProduct")
 				public ProductModel findByProductname(@RequestParam String productname) {
 					return pserv.findByProductName(productname);	
@@ -61,19 +68,20 @@ public class ProductController {
 				}
 
 				// Display most purchased
-			    @GetMapping("/most-purchased")
-			    public ResponseEntity<ProductModel> getMostPurchasedProduct() {
-			        // Call the service to retrieve the most purchased product
-			        ProductModel mostPurchasedProduct = pserv.getMostPurchasedProduct();
+				@GetMapping("/most-purchased")
+				public ResponseEntity<ProductModel> getMostPurchasedProduct(@RequestParam String business) {
+					// Call the service to retrieve the most purchased product for the given business
+					ProductModel mostPurchasedProduct = pserv.getMostPurchasedProductByBusiness(business);
 
-			        if (mostPurchasedProduct != null) {
-			            return ResponseEntity.ok(mostPurchasedProduct);
-			        } else {
-			            return ResponseEntity.notFound().build();
-			        }
-			    }
-				
-			 	// Decrease quantity of a product
+					if (mostPurchasedProduct != null) {
+						return ResponseEntity.ok(mostPurchasedProduct);
+					} else {
+						return ResponseEntity.notFound().build();
+					}
+				}
+
+
+	// Decrease quantity of a product
 			    @PutMapping("/decreaseQuantity/{productid}")
 			    public ResponseEntity<String> decreaseQuantity(
 			            @PathVariable int productid,
@@ -98,15 +106,15 @@ public class ProductController {
 			        }
 			    }
 
-				// Read all products only with the same business_name
-				@GetMapping("/{productid}/accounts")
-				public List<AccountsModel> getAccountsProducts(@PathVariable int productid) {
-					List<AccountsModel> accounts = pserv.getAccounts(productid);
-
-					if (accounts != null) {
-						return accounts;
-					} else {
-						return null;
-					}
-				}
+//				// Read all products only with the same business_name
+//				@GetMapping("/{productid}/accounts")
+//				public List<AccountsModel> getAccountsProducts(@PathVariable int productid) {
+//					List<AccountsModel> accounts = pserv.getAccounts(productid);
+//
+//					if (accounts != null) {
+//						return accounts;
+//					} else {
+//						return null;
+//					}
+//				}
 }
