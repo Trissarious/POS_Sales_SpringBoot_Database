@@ -1,6 +1,7 @@
 package com.pos_sales.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_product")
@@ -17,16 +18,26 @@ public class ProductModel {
     private int purchaseCount;
     private String business;
 
+    @Column(unique = false)
+    @OneToMany
+    public List<AccountsModel> accounts;
+
+    public ProductModel() {
+    }
+
     public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount, String business) {
         this.productid = productid;
         this.productname = productname;
         this.quantity = quantity;
         this.price = price;
         this.purchaseCount = purchaseCount;
+        this.accounts = accounts;
         this.business = business;
     }
 
-
+    public List<AccountsModel> getAccounts() {
+        return accounts;
+    }
     public String getBusiness() {
         return business;
     }

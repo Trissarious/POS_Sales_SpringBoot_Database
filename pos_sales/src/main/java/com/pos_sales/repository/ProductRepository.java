@@ -11,8 +11,7 @@ public interface ProductRepository extends JpaRepository<ProductModel, Integer>{
         ProductModel findByProductname(String productname);
 
         List<ProductModel> findAllByIsDeletedFalse();
-        ProductModel findByProductnameAndIsDeletedFalse(String productname); 
-        ProductModel findTopByOrderByPurchaseCountDesc();
+        ProductModel findByProductnameAndIsDeletedFalse(String productname);
 
         List<ProductModel> findAllByBusiness(String business);
 

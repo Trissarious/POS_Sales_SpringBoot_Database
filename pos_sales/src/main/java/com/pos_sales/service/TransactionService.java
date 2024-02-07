@@ -160,7 +160,6 @@ public class TransactionService {
 				return returnedPrices;
 			}
 
-
 			public Double computeRefundedPricesByBusiness(String business) {
 				List<TransactionModel> refundedTransactions = trepo.findAllByBusinessAndRefunded(business, true);
 				Double refundedPrices = 0.0;

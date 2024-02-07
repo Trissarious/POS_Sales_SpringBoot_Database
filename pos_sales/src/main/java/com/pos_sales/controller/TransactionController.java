@@ -32,10 +32,9 @@ public class TransactionController {
 				
 				//Read all records
 				@GetMapping("/getAllTransaction")
-				public List<TransactionModel> getAllTransaction(){
-					return tserv.getAllTransaction();
+				public List<TransactionModel> getAllTransaction(@RequestParam String business) {
+					return tserv.getAllTransactionByBusiness(business);
 				}
-				
 				//Read a record by transaction id
 				@GetMapping("/getByTransaction")
 				public TransactionModel findByTransactionid(@RequestParam int transactionid) {
