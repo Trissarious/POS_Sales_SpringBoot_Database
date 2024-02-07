@@ -27,6 +27,8 @@ import java.util.List;
 
 		private Double netSales;
 
+		private String business;
+
 	    @Column(unique = false)
 	    @ManyToMany
 	    public List<ProductModel> product;
@@ -35,7 +37,7 @@ import java.util.List;
 	    public TransactionModel() {}
 
 	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name,
-	    		String customer_num, String customer_email, String date_time, boolean refunded, boolean returned, List<ProductModel> product, double netSales, String cashier) {
+	    		String customer_num, String customer_email, String date_time, boolean refunded, boolean returned, List<ProductModel> product, double netSales, String cashier, String business) {
 	    	super();
 	        this.transactionid = transactionid;
 	        this.total_quantity = total_quantity;
@@ -51,12 +53,22 @@ import java.util.List;
 	        this.product = product;
 			this.netSales = netSales;
 			this.cashier = cashier;
+			this.business = business;
 	    }
 
 
 	    //SETTERS AND GETTERS
 
-		public String getCashier() {
+
+	public String getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(String business) {
+		this.business = business;
+	}
+
+	public String getCashier() {
 			return cashier;
 		}
 

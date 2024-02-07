@@ -64,27 +64,27 @@ public class TransactionService {
 				}
 			}
 
-			public Double computeGrossSales() {
-				return trepo.computeGrossSales();
+			public Double computeGrossSalesByBusiness(String business) {
+				return trepo.computeGrossSalesByBusiness(business);
 			}
-			
+
 			public TransactionModel isReturned(int transactionid,  TransactionModel newTransactionDetails) throws Exception {
-				TransactionModel transaction = new TransactionModel();
-				try {
-					//steps in updating
-					//Step 1 - search the id number of the user
-					transaction = trepo.findByTransactionid(transactionid);
-					
-					//Step 2 - update the record
-					transaction.setReturned(newTransactionDetails.isReturned());
-					
-					//Step 3 - save the information and return the value
-					return trepo.save(transaction);
-					
-				} catch (NoSuchElementException nex) {
-					throw new Exception("Cannot refund this transaction.");
-				}
-			}
+						TransactionModel transaction = new TransactionModel();
+						try {
+							//steps in updating
+							//Step 1 - search the id number of the user
+							transaction = trepo.findByTransactionid(transactionid);
+
+							//Step 2 - update the record
+							transaction.setReturned(newTransactionDetails.isReturned());
+
+							//Step 3 - save the information and return the value
+							return trepo.save(transaction);
+
+						} catch (NoSuchElementException nex) {
+							throw new Exception("Cannot refund this transaction.");
+						}
+					}
 
 			public TransactionModel isRefund (int transactionid,  TransactionModel newTransactionDetails) throws Exception {
 				TransactionModel transaction = new TransactionModel();
@@ -132,27 +132,27 @@ public class TransactionService {
 		        }
 		    }
 
-			public Double computeNetSales() {
+			public Double computeNetSalesByBusiness(String business) {
 				// Calculate net sales based on gross sales and deductions
-				Double grossSales = trepo.computeGrossSales();
-				Double deductions = computeDeductions(); // Implement this method to calculate deductions
+				Double grossSales = trepo.computeGrossSalesByBusiness(business);
+				Double deductions = computeDeductionsByBusiness(business); // Implement this method to calculate deductions
 				Double netSales = grossSales - deductions;
 
 				return netSales;
 			}
 
-			private Double computeDeductions() {
+			private Double computeDeductionsByBusiness(String business) {
 				// Logic to compute deductions like returns, discounts, and allowances
-				Double returnedPrices = computeReturnedPrices();
-				Double refundedPrices = computeRefundedPrices();
+				Double returnedPrices = computeReturnedPricesByBusiness(business);
+				Double refundedPrices = computeRefundedPricesByBusiness(business);
 
 				Double totalDeductions = returnedPrices + refundedPrices;
 
 				return totalDeductions;
 			}
 
-			public Double computeReturnedPrices() {
-				List<TransactionModel> returnedTransactions = trepo.findByReturned(true);
+			public Double computeReturnedPricesByBusiness(String business) {
+				List<TransactionModel> returnedTransactions = trepo.findAllByBusinessAndReturned(business, true);
 				Double returnedPrices = 0.0;
 				for (TransactionModel transaction : returnedTransactions) {
 					returnedPrices += transaction.getTotal_price();
@@ -160,8 +160,9 @@ public class TransactionService {
 				return returnedPrices;
 			}
 
-			public Double computeRefundedPrices() {
-				List<TransactionModel> refundedTransactions = trepo.findByRefunded(true);
+
+			public Double computeRefundedPricesByBusiness(String business) {
+				List<TransactionModel> refundedTransactions = trepo.findAllByBusinessAndRefunded(business, true);
 				Double refundedPrices = 0.0;
 				for (TransactionModel transaction : refundedTransactions) {
 					refundedPrices += transaction.getTotal_price();
@@ -169,21 +170,26 @@ public class TransactionService {
 				return refundedPrices;
 			}
 
-			public List<ProductModel> getReturnedProducts() {
-					List<TransactionModel> returnedTransactions = trepo.findByReturned(true);
+			public List<ProductModel> getReturnedProductsByBusiness(String business) {
+				List<TransactionModel> returnedTransactionsByBusiness = trepo.findAllByBusinessAndReturned(business, true);
 				List<ProductModel> returnedProducts = new ArrayList<>();
-				for (TransactionModel transaction : returnedTransactions) {
+				for (TransactionModel transaction : returnedTransactionsByBusiness) {
 					returnedProducts.addAll(transaction.getProduct()); // Assuming you have a method to retrieve products associated with a transaction
 				}
 				return returnedProducts;
 			}
 
-			public List<ProductModel> getRefundedProducts() {
-				List<TransactionModel> refundedTransactions = trepo.findByRefunded(true);
+			public List<ProductModel> getRefundedProductsByBusiness(String business) {
+				List<TransactionModel> refundedTransactionsByBusiness  = trepo.findAllByBusinessAndRefunded(business, true);
 				List<ProductModel> refundedProducts = new ArrayList<>();
-				for (TransactionModel transaction : refundedTransactions) {
+				for (TransactionModel transaction : refundedTransactionsByBusiness) {
 					refundedProducts.addAll(transaction.getProduct()); // Assuming you have a method to retrieve products associated with a transaction
 				}
 				return refundedProducts;
 			}
+
+			public List<TransactionModel> getAllTransactionByBusiness(String business) {
+				return trepo.findAllByBusiness(business);
+			}
+
 }
